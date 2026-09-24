@@ -1,0 +1,22 @@
+{
+  "name": "debezium-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+    "plugin.name": "pgoutput",
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.user": "cdc_user",
+    "database.password": "cdc_password",
+    "database.dbname": "payments_db",
+    "topic.prefix": "v2",
+    "table.include.list": "public.transactions",
+    "slot.name": "debezium_v2",
+    "publication.name": "dbz_publication_v2",
+    "decimal.handling.mode": "double",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false"
+  }
+}
