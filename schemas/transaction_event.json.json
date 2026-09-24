@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransactionCDCEvent",
+  "type": "object",
+  "properties": {
+    "before": {
+      "type": ["object", "null"],
+      "properties": {
+        "id": { "type": "string" },
+        "customer_id": { "type": "string" },
+        "card_id": { "type": "string" },
+        "amount": { "type": "number" },
+        "timestamp": { "type": "integer" }
+      }
+    },
+    "after": {
+      "type": ["object", "null"],
+      "properties": {
+        "id": { "type": "string" },
+        "customer_id": { "type": "string" },
+        "card_id": { "type": "string" },
+        "amount": { "type": "number" },
+        "timestamp": { "type": "integer" }
+      },
+      "required": ["id", "customer_id", "card_id", "amount", "timestamp"]
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "version": { "type": "string" },
+        "connector": { "type": "string" },
+        "name": { "type": "string" },
+        "ts_ms": { "type": "integer" },
+        "db": { "type": "string" },
+        "schema": { "type": "string" },
+        "table": { "type": "string" }
+      }
+    },
+    "op": { 
+      "type": "string",
+      "enum": ["c", "u", "d", "r"],
+      "description": "Operation type: c=create, u=update, d=delete, r=read"
+    },
+    "ts_ms": { "type": "integer" }
+  },
+  "required": ["after", "op"]
+}
